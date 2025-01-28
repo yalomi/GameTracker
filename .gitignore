@@ -1,1 +1,7 @@
 ﻿.idea
+*.iml
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
