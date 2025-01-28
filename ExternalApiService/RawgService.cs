@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using GameTracker.Domain.Entities;
+using Core.Entities;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 

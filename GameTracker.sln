@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTracker", "GameTracker\GameTracker.csproj", "{C3A90A31-5927-4AAD-B8D8-268C6835B13B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{C3A90A31-5927-4AAD-B8D8-268C6835B13B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTracker.Domain", "GameTracker.Domain\GameTracker.Domain.csproj", "{55A86B85-F343-440E-B0FF-BE4C1B359D78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{55A86B85-F343-440E-B0FF-BE4C1B359D78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTracker.Repository", "GameTracker.Repository\GameTracker.Repository.csproj", "{6C3B0F80-B289-4DA1-821A-A951DE1FE2F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{6C3B0F80-B289-4DA1-821A-A951DE1FE2F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTracker.Services", "GameTracker.Services\GameTracker.Services.csproj", "{699B62BC-504F-4CE0-89F1-C68FCBDA2D2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{699B62BC-504F-4CE0-89F1-C68FCBDA2D2B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalApiService", "ExternalApiService\ExternalApiService.csproj", "{DFCBFE23-89C1-417C-84F3-9DB6596F4663}"
 EndProject

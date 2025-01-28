@@ -99,7 +99,7 @@
           }
         }
       },
-      "GameTracker.Domain/1.0.0": {
+      "Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
@@ -107,10 +107,10 @@
           "Newtonsoft.Json": "13.0.3"
         },
         "compile": {
-          "bin/placeholder/GameTracker.Domain.dll": {}
+          "bin/placeholder/Core.dll": {}
         },
         "runtime": {
-          "bin/placeholder/GameTracker.Domain.dll": {}
+          "bin/placeholder/Core.dll": {}
         }
       }
     }
@@ -263,15 +263,15 @@
         "packageIcon.png"
       ]
     },
-    "GameTracker.Domain/1.0.0": {
+    "Core/1.0.0": {
       "type": "project",
-      "path": "../GameTracker.Domain/GameTracker.Domain.csproj",
-      "msbuildProject": "../GameTracker.Domain/GameTracker.Domain.csproj"
+      "path": "../Core/Core.csproj",
+      "msbuildProject": "../Core/Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "GameTracker.Domain >= 1.0.0",
+      "Core >= 1.0.0",
       "Microsoft.Extensions.Configuration.Abstractions >= 9.0.1",
       "Newtonsoft.Json >= 13.0.3"
     ]
@@ -301,8 +301,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\projects\\dotnet projects\\GameTracker\\GameTracker.Domain\\GameTracker.Domain.csproj": {
-              "projectPath": "D:\\projects\\dotnet projects\\GameTracker\\GameTracker.Domain\\GameTracker.Domain.csproj"
+            "D:\\projects\\dotnet projects\\GameTracker\\Core\\Core.csproj": {
+              "projectPath": "D:\\projects\\dotnet projects\\GameTracker\\Core\\Core.csproj"
             }
           }
         }
