@@ -1,0 +1,15 @@
+D:\projects\dotnet projects\GameTracker\RawgService\bin\Debug\net8.0\RawgService.deps.json
+D:\projects\dotnet projects\GameTracker\RawgService\bin\Debug\net8.0\RawgService.dll
+D:\projects\dotnet projects\GameTracker\RawgService\bin\Debug\net8.0\RawgService.pdb
+D:\projects\dotnet projects\GameTracker\RawgService\bin\Debug\net8.0\GameTracker.Domain.dll
+D:\projects\dotnet projects\GameTracker\RawgService\bin\Debug\net8.0\GameTracker.Domain.pdb
+D:\projects\dotnet projects\GameTracker\RawgService\obj\Debug\net8.0\RawgService.csproj.AssemblyReference.cache
+D:\projects\dotnet projects\GameTracker\RawgService\obj\Debug\net8.0\RawgService.GeneratedMSBuildEditorConfig.editorconfig
+D:\projects\dotnet projects\GameTracker\RawgService\obj\Debug\net8.0\RawgService.AssemblyInfoInputs.cache
+D:\projects\dotnet projects\GameTracker\RawgService\obj\Debug\net8.0\RawgService.AssemblyInfo.cs
+D:\projects\dotnet projects\GameTracker\RawgService\obj\Debug\net8.0\RawgService.csproj.CoreCompileInputs.cache
+D:\projects\dotnet projects\GameTracker\RawgService\obj\Debug\net8.0\RawgServ.51DF5F8E.Up2Date
+D:\projects\dotnet projects\GameTracker\RawgService\obj\Debug\net8.0\RawgService.dll
+D:\projects\dotnet projects\GameTracker\RawgService\obj\Debug\net8.0\refint\RawgService.dll
+D:\projects\dotnet projects\GameTracker\RawgService\obj\Debug\net8.0\RawgService.pdb
+D:\projects\dotnet projects\GameTracker\RawgService\obj\Debug\net8.0\ref\RawgService.dll

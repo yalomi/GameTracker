@@ -1,0 +1,15 @@
+D:\projects\dotnet projects\GameTracker\ExternalApiService\bin\Debug\net8.0\ExternalApiService.deps.json
+D:\projects\dotnet projects\GameTracker\ExternalApiService\bin\Debug\net8.0\ExternalApiService.dll
+D:\projects\dotnet projects\GameTracker\ExternalApiService\bin\Debug\net8.0\ExternalApiService.pdb
+D:\projects\dotnet projects\GameTracker\ExternalApiService\bin\Debug\net8.0\GameTracker.Domain.dll
+D:\projects\dotnet projects\GameTracker\ExternalApiService\bin\Debug\net8.0\GameTracker.Domain.pdb
+D:\projects\dotnet projects\GameTracker\ExternalApiService\obj\Debug\net8.0\ExternalApiService.csproj.AssemblyReference.cache
+D:\projects\dotnet projects\GameTracker\ExternalApiService\obj\Debug\net8.0\ExternalApiService.GeneratedMSBuildEditorConfig.editorconfig
+D:\projects\dotnet projects\GameTracker\ExternalApiService\obj\Debug\net8.0\ExternalApiService.AssemblyInfoInputs.cache
+D:\projects\dotnet projects\GameTracker\ExternalApiService\obj\Debug\net8.0\ExternalApiService.AssemblyInfo.cs
+D:\projects\dotnet projects\GameTracker\ExternalApiService\obj\Debug\net8.0\ExternalApiService.csproj.CoreCompileInputs.cache
+D:\projects\dotnet projects\GameTracker\ExternalApiService\obj\Debug\net8.0\External.3062093B.Up2Date
+D:\projects\dotnet projects\GameTracker\ExternalApiService\obj\Debug\net8.0\ExternalApiService.dll
+D:\projects\dotnet projects\GameTracker\ExternalApiService\obj\Debug\net8.0\refint\ExternalApiService.dll
+D:\projects\dotnet projects\GameTracker\ExternalApiService\obj\Debug\net8.0\ExternalApiService.pdb
+D:\projects\dotnet projects\GameTracker\ExternalApiService\obj\Debug\net8.0\ref\ExternalApiService.dll
