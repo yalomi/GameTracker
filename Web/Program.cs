@@ -1,16 +1,19 @@
-using Application;
+using Application.IRepositories;
+using Application.IServices;
+using Application.Services;
 using Core;
 using ExternalApiService;
 using Infrastructure;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
-builder.Services.AddScoped<GameContext, GameContext>();
-builder.Services.AddScoped<GamesRepository, GamesRepository>();
-builder.Services.AddScoped<GenreService, GenreService>();
+//builder.Services.AddScoped<GameContext, GameContext>(); //Delete this
+builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<RawgService, RawgService>();
+builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddHttpClient();

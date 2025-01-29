@@ -1,4 +1,6 @@
-﻿using Application;
+﻿using System.Diagnostics;
+using Application.IServices;
+using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
@@ -7,18 +9,30 @@ namespace Web.Controllers;
 [Route("api/[controller]")]
 public class GenresController : ControllerBase
 {
-    private readonly GenreService _genreService;
+    private readonly IServiceManager _serviceManager;
 
-    public GenresController(GenreService genreService)
+    public GenresController(IServiceManager serviceManager)
     {
-        _genreService = genreService;
+        _serviceManager = serviceManager;
     }
-    
+
+    [HttpGet]
+    public ActionResult<List<Genre>> GetAll()
+    {
+        var genres = _serviceManager.GenreService.GetAll();
+        return Ok(genres);
+    }
     
     [HttpPost("{id}")]
-    public async Task<IActionResult> Create(int id)
+    public async Task<IActionResult> CreateOne(int id)
     {
-        await _genreService.CreateGenre(id);
-        return Created();
+        return Ok();
     }
+
+    [HttpPost("genres")]
+    public async Task<IActionResult> CreateMany()
+    {
+        return Ok();
+    }
+    
 }

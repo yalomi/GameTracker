@@ -20,8 +20,13 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Application\Application.csproj" />
       <ProjectReference Include="..\ExternalApiService\ExternalApiService.csproj" />
       <ProjectReference Include="..\Core\Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ExternalApi\" />
     </ItemGroup>
 
 </Project>
