@@ -14,17 +14,14 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T>
         _context = context;
     }
 
-    public IQueryable<T> GetAll()
-    {
-        return _context.Set<T>().AsNoTracking();
-    }
+    public IQueryable<T> GetAll() => 
+        _context.Set<T>().AsNoTracking();
+    
 
-    public IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression)
-    {
-        return _context.Set<T>().Where(expression).AsNoTracking();
-    }
-    public void Create(T entity)
-    {
-        _context.Set<T>().AddAsync(entity);
-    }
+    public IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression, bool trackChanges) =>
+        !trackChanges ? _context.Set<T>().Where(expression).AsNoTracking() 
+            : _context.Set<T>().Where(expression);
+    
+    public async Task CreateAsync(T entity) =>
+        await _context.Set<T>().AddAsync(entity);
 }

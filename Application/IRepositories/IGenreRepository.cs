@@ -4,7 +4,7 @@ namespace Application.IRepositories;
 
 public interface IGenreRepository
 {
-    IEnumerable<Genre> GetAllGenres();
-    Genre GetGenreById(Guid id);
-    void CreateGenre(Genre genre);
+    Task<List<Genre>> GetAllGenres();
+    Task<Genre> GetGenreById(Guid id);
+    Task CreateGenre(Genre genre);
 }

@@ -4,5 +4,5 @@ namespace Application.IServices;
 
 public interface IGenreService
 {
-    IEnumerable<Genre> GetAll();
+    Task<List<Genre>> GetAll();
 }

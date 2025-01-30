@@ -16,4 +16,5 @@ public class RepositoryManager : IRepositoryManager
     }
     public IGenreRepository GenreRepository => _genreRepository.Value;
     public IGameRepository GameRepository => _gameRepository.Value;
+    public async Task SaveAsync() => await _context.SaveChangesAsync();
 }

@@ -1,5 +1,6 @@
 ﻿using Application.IRepositories;
 using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
@@ -9,18 +10,14 @@ public class GenresRepository : RepositoryBase<Genre>, IGenreRepository
     {
     }
 
-    public IEnumerable<Genre> GetAllGenres()
-    {
-        return GetAll().OrderBy(g => g.Name).ToList();
-    }
+    public Task<List<Genre>> GetAllGenres() =>
+        GetAll().OrderBy(g => g.Name).ToListAsync();
 
-    public Genre GetGenreById(Guid id)
-    {
-        return GetByCondition(g => g.Id == id).FirstOrDefault();
-    }
 
-    public void CreateGenre(Genre genre)
-    {
-        Create(genre);
-    }
+    public Task<Genre> GetGenreById(Guid id) =>
+        GetByCondition(g => g.Id == id, false).FirstOrDefaultAsync();
+    
+
+    public async Task CreateGenre(Genre genre) => 
+        await CreateAsync(genre);
 }

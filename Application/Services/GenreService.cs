@@ -12,9 +12,9 @@ public class GenreService : IGenreService
     {
         _repositoryManager = repositoryManager;
     }
-    public IEnumerable<Genre> GetAll()
+    public async Task<List<Genre>> GetAll()
     {
-        var genres = _repositoryManager.GenreRepository.GetAllGenres();
+        var genres = await _repositoryManager.GenreRepository.GetAllGenres();
         //Mapping
         return genres;
     }
