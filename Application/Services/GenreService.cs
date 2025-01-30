@@ -1,16 +1,22 @@
-﻿using Application.IRepositories;
+﻿using Application.IExternalApiServices;
+using Application.IRepositories;
 using Application.IServices;
+using AutoMapper;
 using Core.Entities;
-using ExternalApiService;
 
 namespace Application.Services;
 
 public class GenreService : IGenreService
 {
     private readonly IRepositoryManager _repositoryManager;
-    public GenreService(IRepositoryManager repositoryManager)
+    private readonly Lazy<IRawgService> _rawgService;
+    private readonly IMapper _mapper;
+    public GenreService(
+        IRepositoryManager repositoryManager, IMapper mapper, IRawgService rawgService)
     {
         _repositoryManager = repositoryManager;
+        _mapper = mapper;
+        _rawgService = new Lazy<IRawgService>(rawgService);
     }
     public async Task<List<Genre>> GetAll()
     {
@@ -25,11 +31,11 @@ public class GenreService : IGenreService
         //Mapping
         return genre;
     }
-    // public async Task CreateGenre(int id)
-    // {
-    //     var genre = await _rawgService.FetchGenreAsync(id);
-    //     
-    //     _context.Genres.Add(genre);
-    //     await _context.SaveChangesAsync();
-    // }
+    public async Task CreateOne(int id)
+    {
+        var rawgGenre = await _rawgService.Value.FetchGenreAsync(id);
+        var genre = _mapper.Map<Genre>(rawgGenre);
+        await _repositoryManager.GenreRepository.CreateGenre(genre);
+        await _repositoryManager.SaveAsync();
+    }
 }

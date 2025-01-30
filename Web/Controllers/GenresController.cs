@@ -29,12 +29,13 @@ public class GenresController : ControllerBase
         return Ok(genre);
     }
     
-    // [HttpPost("{id}")]
-    // public async Task<IActionResult> CreateOne(int id)
-    // {
-    //     return Ok();
-    // }
-    //
+    [HttpPost("{id}")]
+    public async Task<IActionResult> CreateOne(int id)
+    {
+        await _serviceManager.GenreService.CreateOne(id);
+        return Ok();
+    }
+    
     // [HttpPost("genres")]
     // public async Task<IActionResult> CreateMany()
     // {

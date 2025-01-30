@@ -1,3 +1,4 @@
+using Application.IExternalApiServices;
 using Application.IRepositories;
 using Application.IServices;
 using Application.Services;
@@ -12,7 +13,7 @@ builder.Services.AddControllers();
 
 //builder.Services.AddScoped<GameContext, GameContext>(); //Delete this
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
-builder.Services.AddScoped<RawgService, RawgService>();
+builder.Services.AddScoped<IRawgService, RawgService>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
