@@ -5,4 +5,5 @@ namespace Application.IExternalApiServices;
 public interface IRawgService
 {
     Task<RawgGenre> FetchGenreAsync(int genreId);
+    Task<List<RawgGenre>> FetchGenresAsync();
 }

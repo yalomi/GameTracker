@@ -10,6 +10,7 @@ public class RawgService : IRawgService
 {
     private readonly HttpClient _httpClient;
     private readonly string _apiKey;
+    private readonly string _baseUrl = $"https://api.rawg.io/api";
 
     public RawgService(HttpClient httpClient, IConfiguration configuration)
     {
@@ -20,7 +21,7 @@ public class RawgService : IRawgService
     public async Task<RawgGenre> FetchGenreAsync(int genreId)
     {
         var response = await _httpClient.GetAsync(
-            $"https://api.rawg.io/api/genres/{genreId}?key={_apiKey}");
+            $"{_baseUrl}/genres/{genreId}?key={_apiKey}");
 
         if (!response.IsSuccessStatusCode)
         {
@@ -31,6 +32,21 @@ public class RawgService : IRawgService
         var rawgGenre = JsonConvert.DeserializeObject<RawgGenre>(content);
         
         return rawgGenre;
+    }
+
+    public async Task<List<RawgGenre>> FetchGenresAsync()
+    {
+        var response = await _httpClient.GetAsync(
+            $"{_baseUrl}/genres?key={_apiKey}");
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception($"Unable to find genres");
+        }
+        
+        var content = await response.Content.ReadAsStringAsync();
+        var rawgGenres = JsonConvert.DeserializeObject<RawgGenresResponse>(content).Results;
+        return rawgGenres;
     }
 
     // public async Task<Game> FetchGameAsync(int gameId)

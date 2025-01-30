@@ -36,10 +36,11 @@ public class GenresController : ControllerBase
         return Ok();
     }
     
-    // [HttpPost("genres")]
-    // public async Task<IActionResult> CreateMany()
-    // {
-    //     return Ok();
-    // }
+    [HttpPost()]
+    public async Task<IActionResult> CreateMany()
+    {
+        await _serviceManager.GenreService.CreateMany();
+        return Ok();
+    }
     
 }

@@ -38,4 +38,16 @@ public class GenreService : IGenreService
         await _repositoryManager.GenreRepository.CreateGenre(genre);
         await _repositoryManager.SaveAsync();
     }
+
+    public async Task CreateMany()
+    {
+        var rawgGenres = await _rawgService.Value.FetchGenresAsync();
+        var genres = _mapper.Map<List<Genre>>(rawgGenres);
+        
+        foreach (var genre in genres)
+        {
+            await _repositoryManager.GenreRepository.CreateGenre(genre);
+        }
+        await _repositoryManager.SaveAsync();
+    }
 }
