@@ -18,6 +18,13 @@ public class GenreService : IGenreService
         //Mapping
         return genres;
     }
+
+    public async Task<Genre> GetById(Guid id)
+    {
+        var genre = await _repositoryManager.GenreRepository.GetGenreById(id);
+        //Mapping
+        return genre;
+    }
     // public async Task CreateGenre(int id)
     // {
     //     var genre = await _rawgService.FetchGenreAsync(id);

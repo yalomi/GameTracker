@@ -21,6 +21,13 @@ public class GenresController : ControllerBase
         var genres = await _serviceManager.GenreService.GetAll();
         return Ok(genres);
     }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Genre>> GetById(Guid id)
+    {
+        var genre = await _serviceManager.GenreService.GetById(id);
+        return Ok(genre);
+    }
     
     // [HttpPost("{id}")]
     // public async Task<IActionResult> CreateOne(int id)
