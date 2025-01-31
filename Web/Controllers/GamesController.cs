@@ -22,9 +22,9 @@ public class GamesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult> CreateMany()
+    public async Task<ActionResult> CreateMany([FromQuery] int pageQuantity)
     {
-        await _serviceManager.GameService.CreateMany();
+        await _serviceManager.GameService.CreateMany(pageQuantity);
         return Created();
     }
 }

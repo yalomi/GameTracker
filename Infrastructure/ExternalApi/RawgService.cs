@@ -65,19 +65,23 @@ public class RawgService : IRawgService
         return rawgGame;    
     }
 
-    public async Task<List<RawgGame>> FetchGamesAsync()
+    public async Task<List<RawgGame>> FetchGamesAsync(int quantity)
     {
-        int page = 1;
-        var response = await _httpClient.GetAsync(
-            $"{_baseUrl}/games?key={_apiKey}&ordering=-metacritic&page_size=50&page={page}");
-
-        if (!response.IsSuccessStatusCode)
+        var rawgGames = new List<RawgGame>();
+        for (int page = 1; page <= quantity; page++)
         {
-            throw new Exception($"Unable to find games");
+            var response = await _httpClient.GetAsync(
+                $"{_baseUrl}/games?key={_apiKey}&ordering=-metacritic&page_size=40&page={page}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Unable to find games");
+            }
+            
+            var content = await response.Content.ReadAsStringAsync();
+            var games = JsonConvert.DeserializeObject<RawgGamesResponse>(content).Results;
+            rawgGames.AddRange(games);
         }
-        
-        var content = await response.Content.ReadAsStringAsync();
-        var rawgGames = JsonConvert.DeserializeObject<RawgGamesResponse>(content).Results;
         return rawgGames;
     }
 }

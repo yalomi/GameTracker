@@ -3,5 +3,5 @@
 public interface IGameService
 {
     Task CreateOne(int id);
-    Task CreateMany();
+    Task CreateMany(int quantity);
 }
