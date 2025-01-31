@@ -2,6 +2,7 @@
 using Core.Entities;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Infrastructure.ExternalApi;
 
@@ -62,5 +63,21 @@ public class RawgService : IRawgService
         var rawgGame = JsonConvert.DeserializeObject<RawgGame>(content);
     
         return rawgGame;    
+    }
+
+    public async Task<List<RawgGame>> FetchGamesAsync()
+    {
+        int page = 1;
+        var response = await _httpClient.GetAsync(
+            $"{_baseUrl}/games?key={_apiKey}&ordering=-metacritic&page_size=50&page={page}");
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception($"Unable to find games");
+        }
+        
+        var content = await response.Content.ReadAsStringAsync();
+        var rawgGames = JsonConvert.DeserializeObject<RawgGamesResponse>(content).Results;
+        return rawgGames;
     }
 }

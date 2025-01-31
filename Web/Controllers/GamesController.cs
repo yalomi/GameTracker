@@ -20,4 +20,11 @@ public class GamesController : ControllerBase
         await _serviceManager.GameService.CreateOne(id);
         return Created();
     }
+
+    [HttpPost]
+    public async Task<ActionResult> CreateMany()
+    {
+        await _serviceManager.GameService.CreateMany();
+        return Created();
+    }
 }

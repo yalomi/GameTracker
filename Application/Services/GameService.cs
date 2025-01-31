@@ -25,4 +25,12 @@ public class GameService : IGameService
         await _repositoryManager.GameRepository.AddGameAsync(game, rawgGame);
         await _repositoryManager.SaveAsync();
     }
+
+    public async Task CreateMany()
+    {
+        var rawgGames = await _rawgService.Value.FetchGamesAsync();
+        var games = _mapper.Map<List<Game>>(rawgGames);
+        await _repositoryManager.GameRepository.AddGamesAsync(games, rawgGames);
+        await _repositoryManager.SaveAsync();
+    }
 }

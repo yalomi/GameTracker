@@ -1,5 +1,6 @@
 ﻿using Application.IRepositories;
 using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
@@ -24,5 +25,20 @@ public class GamesRepository : RepositoryBase<Game>, IGameRepository
         game.Genres = genres;
         
         await CreateAsync(game);
+    }
+
+    public async Task AddGamesAsync(List<Game> games, List<RawgGame> rawgGames)
+    {
+        for (int i = 0; i < games.Count; i++)
+        {
+            var genres = await Context.Genres
+                .Where(genre => rawgGames[i].Genres
+                    .Select(rawgGenre => rawgGenre.RawgId)
+                    .Contains(genre.RawgId))
+                .ToListAsync();
+            
+            games[i].Genres = genres;
+            await CreateAsync(games[i]);
+        }
     }
 }
