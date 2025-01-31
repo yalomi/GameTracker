@@ -1,27 +1,28 @@
 ﻿using Application.IRepositories;
+using Core.Entities;
 
 namespace Infrastructure.Repositories;
 
-public class GamesRepository : IGameRepository
+public class GamesRepository : RepositoryBase<Game>, IGameRepository
 {
-    // private readonly GameContext _context;
-    // private readonly RawgService _rawgService;
-    //
-    // public GamesRepository(GameContext context, RawgService rawgService)
-    // {
-    //     _context = context;
-    //     _rawgService = rawgService;
-    // }
-    // public List<Game> GetAll()
-    // {
-    //     return _context.Games.ToList();
-    // }
-    //
-    // public async Task FetchGameToDb(int id)
-    // {
-    //     var game = await _rawgService.FetchGameAsync(id);
-    //     
-    //     _context.Games.Add(game);
-    //     await _context.SaveChangesAsync();
-    // }
+    public GamesRepository(GameContext context) 
+        : base(context)
+    {
+    }
+    
+    public async Task AddGameAsync(Game game, RawgGame rawgGame)
+    {
+        // var genres = Context.Genres.Where(genre =>
+        //     genre.RawgId == rawgGame.Genres.Select(rawgGenre => rawgGenre.RawgId).First()).ToList();
+        
+        var genres = Context.Genres
+            .Where(genre => rawgGame.Genres
+                .Select(rawgGenre => rawgGenre.RawgId)
+                .Contains(genre.RawgId))
+            .ToList(); // Находим все жанры по RawgId
+        
+        game.Genres = genres;
+        
+        await CreateAsync(game);
+    }
 }

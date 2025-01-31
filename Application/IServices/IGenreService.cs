@@ -8,4 +8,5 @@ public interface IGenreService
     Task<Genre> GetById(Guid id);
     Task CreateOne(int id);
     Task CreateMany();
+    Task DeleteOne(Guid id);
 }

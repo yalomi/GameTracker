@@ -7,21 +7,24 @@ namespace Infrastructure.Repositories;
 public abstract class RepositoryBase<T> : IRepositoryBase<T>
     where T : class
 {
-    private readonly GameContext _context;
+    protected readonly GameContext Context;
 
     protected RepositoryBase(GameContext context)
     {
-        _context = context;
+        Context = context;
     }
 
     public IQueryable<T> GetAll() => 
-        _context.Set<T>().AsNoTracking();
+        Context.Set<T>().AsNoTracking();
     
 
     public IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression, bool trackChanges) =>
-        !trackChanges ? _context.Set<T>().Where(expression).AsNoTracking() 
-            : _context.Set<T>().Where(expression);
+        !trackChanges ? Context.Set<T>().Where(expression).AsNoTracking() 
+            : Context.Set<T>().Where(expression);
     
     public async Task CreateAsync(T entity) =>
-        await _context.Set<T>().AddAsync(entity);
+        await Context.Set<T>().AddAsync(entity);
+
+    public void DeleteAsync(T entity) =>
+        Context.Set<T>().Remove(entity);
 }

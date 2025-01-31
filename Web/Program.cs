@@ -3,8 +3,8 @@ using Application.IRepositories;
 using Application.IServices;
 using Application.Services;
 using Core;
-using ExternalApiService;
 using Infrastructure;
+using Infrastructure.ExternalApi;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,8 +13,8 @@ builder.Services.AddControllers();
 
 //builder.Services.AddScoped<GameContext, GameContext>(); //Delete this
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
-builder.Services.AddScoped<IRawgService, RawgService>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
+builder.Services.AddScoped<IRawgService, RawgService>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddHttpClient();

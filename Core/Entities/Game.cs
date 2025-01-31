@@ -8,5 +8,5 @@ public class Game
     public DateOnly ReleaseDate { get; set; }
     public string BackgroundImage { get; set; } = string.Empty;
     public int Metacritic { get; set; }
-    public List<Genre> Genres { get; set; } = [];
+    public List<Genre> Genres { get; set; } = new List<Genre>();
 }

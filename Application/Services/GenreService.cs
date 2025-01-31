@@ -50,4 +50,10 @@ public class GenreService : IGenreService
         }
         await _repositoryManager.SaveAsync();
     }
+
+    public async Task DeleteOne(Guid id)
+    {
+        await _repositoryManager.GenreRepository.DeleteGenre(id);
+        await _repositoryManager.SaveAsync();
+    }
 }

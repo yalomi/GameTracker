@@ -15,7 +15,8 @@ public class ServiceManager : IServiceManager
         _genreService = new Lazy<IGenreService>(
             () => new GenreService(repositoryManager, mapper, rawgService));
         
-        _gamesService = new Lazy<IGameService>(() => new GameService());
+        _gamesService = new Lazy<IGameService>(
+            () => new GameService(repositoryManager, rawgService, mapper));
     }
 
     public IGenreService GenreService => _genreService.Value;

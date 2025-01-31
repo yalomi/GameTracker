@@ -1,10 +1,9 @@
 ﻿using Application.IExternalApiServices;
-using AutoMapper;
 using Core.Entities;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
-namespace ExternalApiService;
+namespace Infrastructure.ExternalApi;
 
 public class RawgService : IRawgService
 {
@@ -49,29 +48,19 @@ public class RawgService : IRawgService
         return rawgGenres;
     }
 
-    // public async Task<Game> FetchGameAsync(int gameId)
-    // {
-    //     var response = await _httpClient.GetAsync(
-    //         $"https://api.rawg.io/api/games/{gameId}?key={_apiKey}");
-    //
-    //     if (!response.IsSuccessStatusCode)
-    //     {
-    //         throw new Exception($"Unable to find game with id: {gameId}");
-    //     }
-    //     
-    //     var content = await response.Content.ReadAsStringAsync();
-    //     var rawgGame = JsonConvert.DeserializeObject<RawgGame>(content);
-    //
-    //     var game = new Game
-    //     {
-    //         Id = Guid.NewGuid(),
-    //         RawgId = rawgGame.Id,
-    //         Name = rawgGame.Name,
-    //         ReleaseDate = rawgGame.ReleaseDate,
-    //         BackgroundImage = rawgGame.BackgroundImage,
-    //         Metacritic = rawgGame.Metacritic,
-    //         Genres = rawgGame.Genres,
-    //     };
-    //
-    //     return game;    }
+    public async Task<RawgGame> FetchGameAsync(int gameId)
+    {
+        var response = await _httpClient.GetAsync(
+            $"{_baseUrl}/games/{gameId}?key={_apiKey}");
+    
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception($"Unable to find game with id: {gameId}");
+        }
+        
+        var content = await response.Content.ReadAsStringAsync();
+        var rawgGame = JsonConvert.DeserializeObject<RawgGame>(content);
+    
+        return rawgGame;    
+    }
 }

@@ -2,5 +2,5 @@
 
 public interface IGameService
 {
-    
+    Task CreateOne(int id);
 }

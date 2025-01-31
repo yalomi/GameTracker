@@ -11,7 +11,7 @@ public class RepositoryManager : IRepositoryManager
     public RepositoryManager(GameContext context)
     {
         _genreRepository = new Lazy<IGenreRepository>(() => new GenresRepository(context));
-        _gameRepository = new Lazy<IGameRepository>(() => new GamesRepository());
+        _gameRepository = new Lazy<IGameRepository>(() => new GamesRepository(context));
         _context = context;
     }
     public IGenreRepository GenreRepository => _genreRepository.Value;

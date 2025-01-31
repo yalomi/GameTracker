@@ -20,4 +20,7 @@ public class GenresRepository : RepositoryBase<Genre>, IGenreRepository
 
     public async Task CreateGenre(Genre genre) => 
         await CreateAsync(genre);
+
+    public async Task DeleteGenre(Guid id) =>
+        DeleteAsync(await GetGenreById(id));
 }
