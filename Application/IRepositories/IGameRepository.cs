@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using Application.Dtos;
+using Core.Entities;
 
 namespace Application.IRepositories;
 

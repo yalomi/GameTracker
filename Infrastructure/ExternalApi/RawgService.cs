@@ -1,4 +1,5 @@
-﻿using Application.IExternalApiServices;
+﻿using Application.Dtos;
+using Application.IExternalApiServices;
 using Core.Entities;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;

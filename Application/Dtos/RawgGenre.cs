@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Core.Entities;
+namespace Application.Dtos;
 
 public class RawgGenre
 {

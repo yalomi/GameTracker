@@ -1,4 +1,6 @@
-﻿namespace Core.Entities;
+﻿using Core.Entities;
+
+namespace Application.Dtos;
 
 public class RawgGenresResponse
 {

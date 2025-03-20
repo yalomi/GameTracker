@@ -1,4 +1,4 @@
-﻿namespace Core.Entities;
+﻿namespace Application.Dtos;
 
 public class RawgGamesResponse
 {
