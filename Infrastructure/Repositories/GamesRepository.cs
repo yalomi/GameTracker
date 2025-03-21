@@ -11,7 +11,15 @@ public class GamesRepository : RepositoryBase<Game>, IGameRepository
         : base(context)
     {
     }
-    
+
+    public async Task<List<Game>> GetAllGamesAsync()
+    {
+        var games = await Context.Games.AsNoTracking().OrderByDescending(g => g.Metacritic)
+            .Include(g => g.Genres).ToListAsync();
+        
+        return games; 
+    }
+
     public async Task AddGameAsync(Game game, RawgGame rawgGame)
     {
         // var genres = Context.Genres.Where(genre =>

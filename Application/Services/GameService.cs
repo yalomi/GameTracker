@@ -1,4 +1,5 @@
-﻿using Application.IExternalApiServices;
+﻿using Application.Dtos;
+using Application.IExternalApiServices;
 using Application.IRepositories;
 using Application.IServices;
 using AutoMapper;
@@ -18,6 +19,15 @@ public class GameService : IGameService
         _mapper = mapper;
         _rawgService = new Lazy<IRawgService>(rawgService);
     }
+
+    public async Task<List<GameDto>> GetAll()
+    {
+        var games = await _repositoryManager.GameRepository.GetAllGamesAsync();
+        
+        var gameDtos = _mapper.Map<List<GameDto>>(games);
+        return gameDtos;
+    }
+
     public async Task CreateOne(int id)
     {
         var rawgGame = await _rawgService.Value.FetchGameAsync(id);

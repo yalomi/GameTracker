@@ -1,4 +1,6 @@
-﻿using Application.IServices;
+﻿using Application.Dtos;
+using Application.IServices;
+using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
@@ -12,6 +14,13 @@ public class GamesController : ControllerBase
     public GamesController(IServiceManager serviceManager)
     {
         _serviceManager = serviceManager;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<List<GameDto>>> GetAll()
+    {
+        var gameDtos = await _serviceManager.GameService.GetAll();
+        return Ok(gameDtos);
     }
 
     [HttpPost("{id}")]
