@@ -4,4 +4,5 @@ public interface IServiceManager
 {
     IGenreService GenreService { get; }
     IGameService GameService { get; }
+    IUserService UserService { get; }
 }

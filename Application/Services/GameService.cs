@@ -13,16 +13,16 @@ public class GameService : IGameService
     private readonly Lazy<IRawgService> _rawgService;
     private readonly IMapper _mapper;
 
-    public GameService(IRepositoryManager repositoryManager, IRawgService rawgService, IMapper mapper)
+    public GameService(IRepositoryManager repositoryManager, IMapper mapper, IRawgService rawgService)
     {
         _repositoryManager = repositoryManager;
         _mapper = mapper;
         _rawgService = new Lazy<IRawgService>(rawgService);
     }
 
-    public async Task<List<GameDto>> GetAll()
+    public async Task<List<GameDto>> GetAllAsync()
     {
-        var games = await _repositoryManager.GameRepository.GetAllGamesAsync();
+        var games = await _repositoryManager.GameRepository.GetAllAsync();
         
         var gameDtos = _mapper.Map<List<GameDto>>(games);
         return gameDtos;

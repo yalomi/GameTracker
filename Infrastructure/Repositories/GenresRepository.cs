@@ -6,7 +6,7 @@ namespace Infrastructure.Repositories;
 
 public class GenresRepository : RepositoryBase<Genre>, IGenreRepository
 {
-    public GenresRepository(GameContext context) : base(context)
+    public GenresRepository(TrackerContext context) : base(context)
     {
     }
 

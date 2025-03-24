@@ -19,7 +19,7 @@ public class GamesController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<GameDto>>> GetAll()
     {
-        var gameDtos = await _serviceManager.GameService.GetAll();
+        var gameDtos = await _serviceManager.GameService.GetAllAsync();
         return Ok(gameDtos);
     }
 
