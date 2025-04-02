@@ -15,5 +15,7 @@ public class GenresMappingProfile : Profile
                 => opt.MapFrom(src => src.RawgId))
             .ForMember(dest => dest.Name, opt =>
                 opt.MapFrom(src => src.Name));
+
+        CreateMap<Genre, GetGenreDto>();
     }
 }

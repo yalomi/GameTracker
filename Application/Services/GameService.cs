@@ -9,20 +9,21 @@ namespace Application.Services;
 
 public class GameService : IGameService
 {
-    private readonly IRepositoryManager _repositoryManager;
+    private readonly IRepositoryManager _manager;
     private readonly Lazy<IRawgService> _rawgService;
     private readonly IMapper _mapper;
 
-    public GameService(IRepositoryManager repositoryManager, IMapper mapper, IRawgService rawgService)
+    public GameService(
+        IRepositoryManager manager, IMapper mapper, IRawgService rawgService)
     {
-        _repositoryManager = repositoryManager;
+        _manager = manager;
         _mapper = mapper;
         _rawgService = new Lazy<IRawgService>(rawgService);
     }
 
     public async Task<List<GameDto>> GetAllAsync()
     {
-        var games = await _repositoryManager.GameRepository.GetAllAsync();
+        var games = await _manager.GameRepository.GetAllAsync();
         
         var gameDtos = _mapper.Map<List<GameDto>>(games);
         return gameDtos;
@@ -32,15 +33,15 @@ public class GameService : IGameService
     {
         var rawgGame = await _rawgService.Value.FetchGameAsync(id);
         var game = _mapper.Map<Game>(rawgGame);
-        await _repositoryManager.GameRepository.AddGameAsync(game, rawgGame);
-        await _repositoryManager.SaveAsync();
+        await _manager.GameRepository.AddGameAsync(game, rawgGame);
+        await _manager.SaveAsync();
     }
 
     public async Task CreateMany(int quantity)
     {
         var rawgGames = await _rawgService.Value.FetchGamesAsync(quantity);
         var games = _mapper.Map<List<Game>>(rawgGames);
-        await _repositoryManager.GameRepository.AddGamesAsync(games, rawgGames);
-        await _repositoryManager.SaveAsync();
+        await _manager.GameRepository.AddGamesAsync(games, rawgGames);
+        await _manager.SaveAsync();
     }
 }

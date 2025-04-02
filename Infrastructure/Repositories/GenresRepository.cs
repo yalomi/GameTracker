@@ -14,7 +14,7 @@ public class GenresRepository : RepositoryBase<Genre>, IGenreRepository
         GetAll().OrderBy(g => g.Name).ToListAsync();
 
 
-    public Task<Genre> GetGenreById(Guid id) =>
+    public Task<Genre?> GetGenreById(Guid id) =>
         GetByCondition(g => g.Id == id, false).FirstOrDefaultAsync();
     
 

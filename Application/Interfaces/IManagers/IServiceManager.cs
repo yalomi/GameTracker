@@ -1,4 +1,6 @@
-﻿namespace Application.IServices;
+﻿using Application.Interfaces.IServices;
+
+namespace Application.IServices;
 
 public interface IServiceManager
 {

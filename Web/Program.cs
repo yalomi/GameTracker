@@ -8,6 +8,7 @@ using Infrastructure;
 using Infrastructure.ExternalApi;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -29,6 +30,8 @@ builder.Services.AddDbContext<TrackerContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
+
+app.ConfigureExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {

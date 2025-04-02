@@ -1,11 +1,11 @@
-﻿using Core.Entities;
+﻿using Application.Dtos;
 
-namespace Application.IServices;
+namespace Application.Interfaces.IServices;
 
 public interface IGenreService
 {
-    Task<List<Genre>> GetAll();
-    Task<Genre> GetById(Guid id);
+    Task<List<GetGenreDto>> GetAll();
+    Task<GetGenreDto> GetById(Guid id);
     Task CreateOne(int id);
     Task CreateMany();
     Task DeleteOne(Guid id);
