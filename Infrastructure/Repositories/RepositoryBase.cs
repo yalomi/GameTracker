@@ -7,9 +7,9 @@ namespace Infrastructure.Repositories;
 public abstract class RepositoryBase<T> : IRepositoryBase<T>
     where T : class
 {
-    protected readonly TrackerContext Context;
+    protected readonly GameTrackerContext Context;
 
-    protected RepositoryBase(TrackerContext context)
+    protected RepositoryBase(GameTrackerContext context)
     {
         Context = context;
     }

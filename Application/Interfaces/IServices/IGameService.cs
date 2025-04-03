@@ -1,7 +1,6 @@
 ﻿using Application.Dtos;
-using Core.Entities;
 
-namespace Application.IServices;
+namespace Application.Interfaces.IServices;
 
 public interface IGameService
 {

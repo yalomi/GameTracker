@@ -1,4 +1,5 @@
-﻿using Application.IRepositories;
+﻿using Application.Interfaces.IRepositories;
+using Application.IRepositories;
 
 namespace Infrastructure.Repositories;
 
@@ -7,9 +8,9 @@ public class RepositoryManager : IRepositoryManager
     private readonly Lazy<IGenreRepository> _genreRepository;
     private readonly Lazy<IGameRepository> _gameRepository;
     private readonly Lazy<IUserRepository> _usersRepository;
-    private readonly TrackerContext _context;
+    private readonly GameTrackerContext _context;
 
-    public RepositoryManager(TrackerContext context)
+    public RepositoryManager(GameTrackerContext context)
     {
         _genreRepository = new Lazy<IGenreRepository>(() => new GenresRepository(context));
         _gameRepository = new Lazy<IGameRepository>(() => new GamesRepository(context));

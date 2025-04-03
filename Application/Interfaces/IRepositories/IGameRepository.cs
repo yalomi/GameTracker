@@ -1,7 +1,7 @@
 ﻿using Application.Dtos;
 using Core.Entities;
 
-namespace Application.IRepositories;
+namespace Application.Interfaces.IRepositories;
 
 public interface IGameRepository
 {

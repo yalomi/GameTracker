@@ -28,6 +28,6 @@ public class AuthController : ControllerBase
     {
         var token = await _manager.UserService.Login(request);
 
-        return Ok();
+        return Ok(token);
     }
 }

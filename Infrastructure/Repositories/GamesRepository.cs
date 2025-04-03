@@ -1,4 +1,5 @@
 ﻿using Application.Dtos;
+using Application.Interfaces.IRepositories;
 using Application.IRepositories;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +8,7 @@ namespace Infrastructure.Repositories;
 
 public class GamesRepository : RepositoryBase<Game>, IGameRepository
 {
-    public GamesRepository(TrackerContext context) 
+    public GamesRepository(GameTrackerContext context) 
         : base(context)
     {
     }

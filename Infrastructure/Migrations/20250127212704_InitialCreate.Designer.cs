@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infrastructure.Migrations
 {
-    [DbContext(typeof(TrackerContext))]
+    [DbContext(typeof(GameTrackerContext))]
     [Migration("20250127212704_InitialCreate")]
     partial class InitialCreate
     {

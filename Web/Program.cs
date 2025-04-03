@@ -1,5 +1,6 @@
 using Application;
 using Application.IExternalApiServices;
+using Application.Interfaces;
 using Application.IRepositories;
 using Application.IServices;
 using Application.Mappers;
@@ -14,7 +15,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddScoped<GameContext, GameContext>(); //Delete this
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddScoped<IRawgService, RawgService>();
@@ -26,8 +26,11 @@ builder.Services.AddAutoMapper(
     typeof(UsersMappingProfile));
 
 builder.Services.AddHttpClient();
-builder.Services.AddDbContext<TrackerContext>(options => 
+builder.Services.AddDbContext<GameTrackerContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
+builder.Services.AddSingleton<IJwtProvider, JwtProvider>();
 
 var app = builder.Build();
 

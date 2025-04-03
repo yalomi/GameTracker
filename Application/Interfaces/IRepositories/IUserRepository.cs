@@ -1,9 +1,9 @@
 ﻿using Core.Entities;
 
-namespace Application.IRepositories;
+namespace Application.Interfaces.IRepositories;
 
 public interface IUserRepository
 {
+    Task<User?> GetByEmailAsync(string email);
     Task AddAsync(User user);
-    Task<User> GetByEmailAsync(string email);
 }

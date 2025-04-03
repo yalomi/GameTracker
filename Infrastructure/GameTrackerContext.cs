@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
-public class TrackerContext : DbContext
+public class GameTrackerContext : DbContext
 {
-    public TrackerContext(DbContextOptions options) : base(options)
+    public GameTrackerContext(DbContextOptions options) : base(options)
     {
         
     }

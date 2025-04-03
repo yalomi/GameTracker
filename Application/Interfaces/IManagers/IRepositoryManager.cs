@@ -1,4 +1,6 @@
-﻿namespace Application.IRepositories;
+﻿using Application.Interfaces.IRepositories;
+
+namespace Application.IRepositories;
 
 public interface IRepositoryManager
 {

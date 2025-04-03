@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infrastructure.Migrations
 {
-    [DbContext(typeof(TrackerContext))]
+    [DbContext(typeof(GameTrackerContext))]
     [Migration("20250131174808_Null able")]
     partial class Nullable
     {
