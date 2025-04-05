@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -7,8 +6,9 @@ namespace Web.Extensions;
 
 public static class AuthenticationExtension
 {
-    public static void AddJwtAuthentication(this IServiceCollection services, JwtOptions jwtOptions)
+    public static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
+        var key = configuration["JwtOptions:SecretKey"];
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
         {
             options.TokenValidationParameters = new TokenValidationParameters
@@ -18,7 +18,7 @@ public static class AuthenticationExtension
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(jwtOptions.SecretKey))
+                    Encoding.UTF8.GetBytes(key))
             };
         });
     }

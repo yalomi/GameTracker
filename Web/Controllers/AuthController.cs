@@ -27,14 +27,6 @@ public class AuthController : ControllerBase
     public async Task<ActionResult<string>> Login([FromBody] UserLoginDto request)
     {
         var token = await _manager.UserService.Login(request);
-        
-        Response.Cookies.Append("jwt", token, new CookieOptions
-        {
-            HttpOnly = true, 
-            Secure = true,  
-            SameSite = SameSiteMode.Strict, 
-            Expires = DateTimeOffset.UtcNow.AddMinutes(5) 
-        });
 
         return Ok(token);
     }
