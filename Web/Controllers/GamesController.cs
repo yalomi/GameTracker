@@ -1,6 +1,7 @@
 ﻿using Application.Dtos;
 using Application.IServices;
 using Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
@@ -16,6 +17,7 @@ public class GamesController : ControllerBase
         _serviceManager = serviceManager;
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<List<GameDto>>> GetAll()
     {

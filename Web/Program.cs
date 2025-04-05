@@ -9,11 +9,17 @@ using Infrastructure;
 using Infrastructure.ExternalApi;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
+
 builder.Services.AddControllers();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwagger();
+
+builder.Services.AddJwtAuthentication(builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>());
 
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
@@ -29,8 +35,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddDbContext<GameTrackerContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
-builder.Services.AddSingleton<IJwtProvider, JwtProvider>();
+builder.Services.AddScoped<IJwtProvider, JwtProvider>(); //Singleton or Scoped
 
 var app = builder.Build();
 
@@ -43,5 +48,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();
