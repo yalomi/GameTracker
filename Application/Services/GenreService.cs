@@ -1,8 +1,8 @@
 ﻿using Application.Dtos;
+using Application.Dtos.GetDtos;
 using Application.IExternalApiServices;
 using Application.Interfaces.IServices;
 using Application.IRepositories;
-using Application.IServices;
 using AutoMapper;
 using Core.Entities;
 using Core.Exceptions;

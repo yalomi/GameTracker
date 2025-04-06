@@ -4,7 +4,6 @@ using Application.Dtos.PostDtos;
 using Application.Interfaces;
 using Application.Interfaces.IServices;
 using Application.IRepositories;
-using Application.IServices;
 using AutoMapper;
 using Core.Entities;
 using Core.Exceptions;
@@ -62,17 +61,5 @@ public class UserService : IUserService
         
         var userDtos = _mapper.Map<List<UserDto>>(users);
         return userDtos;
-    }
-
-    public async Task AddGameToCollection(AddGameToCollectionDto gameDto, Guid userId)
-    {
-        var game =await _manager.GameRepository.GetByIdAsync(gameDto.GameId) 
-                   ?? throw new GameNotFoundException(gameDto.GameId);
-
-        var userGame = _mapper.Map<UserGame>(gameDto);
-        userGame.UserId = userId;
-        
-        await _manager.UsersRepository.AddGameToCollection(userGame);
-        await _manager.SaveAsync();
     }
 }

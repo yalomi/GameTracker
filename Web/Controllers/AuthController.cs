@@ -1,5 +1,5 @@
 ﻿using Application.Dtos;
-using Application.IServices;
+using Application.Interfaces.IManagers;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 

@@ -8,5 +8,4 @@ public interface IUsersRepository
     Task<List<User>> GetAllAsync();
     Task<User?> GetByEmailAsync(string email);
     Task AddAsync(User user);
-    Task AddGameToCollection(UserGame userGame);
 }

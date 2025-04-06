@@ -20,9 +20,4 @@ public class UsersRepository : RepositoryBase<User>, IUsersRepository
 
     public async Task AddAsync(User user) 
         => await CreateAsync(user);
-
-    public async Task AddGameToCollection(UserGame userGame)
-    {
-        await Context.UserGames.AddAsync(userGame);
-    }
 }

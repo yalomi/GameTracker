@@ -1,8 +1,8 @@
 using Application;
 using Application.IExternalApiServices;
 using Application.Interfaces;
+using Application.Interfaces.IManagers;
 using Application.IRepositories;
-using Application.IServices;
 using Application.Mappers;
 using Application.Services;
 using Infrastructure;

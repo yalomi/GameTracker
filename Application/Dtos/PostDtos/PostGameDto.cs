@@ -1,6 +1,6 @@
 ﻿namespace Application.Dtos.PostDtos;
 
-public class AddGameToCollectionDto
+public class PostGameDto
 {
     public Guid GameId { get; set; }
     public int Rating { get; set; }

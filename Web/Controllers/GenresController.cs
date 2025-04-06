@@ -1,5 +1,6 @@
 ﻿using Application.Dtos;
-using Application.IServices;
+using Application.Dtos.GetDtos;
+using Application.Interfaces.IManagers;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
