@@ -1,8 +1,11 @@
-﻿using Application.IExternalApiServices;
+﻿using Application.Dtos;
+using Application.Dtos.GetDtos;
+using Application.IExternalApiServices;
+using Application.Interfaces.IServices;
 using Application.IRepositories;
-using Application.IServices;
 using AutoMapper;
 using Core.Entities;
+using Core.Exceptions;
 
 namespace Application.Services;
 
@@ -18,18 +21,20 @@ public class GenreService : IGenreService
         _mapper = mapper;
         _rawgService = new Lazy<IRawgService>(rawgService);
     }
-    public async Task<List<Genre>> GetAll()
+    public async Task<List<GetGenreDto>> GetAll()
     {
         var genres = await _repositoryManager.GenreRepository.GetAllGenres();
-        //Mapping
-        return genres;
+        var genresDto = _mapper.Map<List<GetGenreDto>>(genres);
+        return genresDto;
     }
 
-    public async Task<Genre> GetById(Guid id)
+    public async Task<GetGenreDto> GetById(Guid id)
     {
-        var genre = await _repositoryManager.GenreRepository.GetGenreById(id);
-        //Mapping
-        return genre;
+        var genre = await _repositoryManager.GenreRepository.GetGenreById(id) 
+                    ?? throw new GenreNotFountException(id);
+        
+        var genreDto = _mapper.Map<GetGenreDto>(genre);
+        return genreDto;
     }
     public async Task CreateOne(int id)
     {

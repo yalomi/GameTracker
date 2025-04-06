@@ -16,7 +16,7 @@ public class RawgService : IRawgService
     public RawgService(HttpClient httpClient, IConfiguration configuration)
     {
         _httpClient = httpClient;
-        _apiKey = configuration["Rawg:ApiKey"];
+        _apiKey = configuration["Rawg:ApiKey"] ?? throw new Exception("Rawg API Key is missing");
     }
 
     public async Task<RawgGenre> FetchGenreAsync(int genreId)

@@ -1,17 +1,32 @@
 ﻿using Application.Dtos;
+using Application.Interfaces.IRepositories;
 using Application.IRepositories;
 using Core.Entities;
+using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
 public class GamesRepository : RepositoryBase<Game>, IGameRepository
 {
-    public GamesRepository(GameContext context) 
+    public GamesRepository(GameTrackerContext context) 
         : base(context)
     {
     }
-    
+
+    public async Task<List<Game>> GetAllAsync()
+    {
+        var games = await GetAll().OrderByDescending(g => g.Metacritic)
+            .Include(g => g.Genres).ToListAsync();
+        
+        return games; 
+    }
+
+    public async Task<Game?> GetByIdAsync(Guid id)
+    {
+        return await GetByCondition(g => g.Id == id, false).FirstOrDefaultAsync();
+    }
+
     public async Task AddGameAsync(Game game, RawgGame rawgGame)
     {
         // var genres = Context.Genres.Where(genre =>
@@ -30,7 +45,7 @@ public class GamesRepository : RepositoryBase<Game>, IGameRepository
 
     public async Task AddGamesAsync(List<Game> games, List<RawgGame> rawgGames)
     {
-        for (int i = 0; i < games.Count; i++)
+        for (var i = 0; i < games.Count; i++)
         {
             var genres = await Context.Genres
                 .Where(genre => rawgGames[i].Genres

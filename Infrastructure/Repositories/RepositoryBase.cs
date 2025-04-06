@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Application.IRepositories;
+using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
@@ -7,9 +8,9 @@ namespace Infrastructure.Repositories;
 public abstract class RepositoryBase<T> : IRepositoryBase<T>
     where T : class
 {
-    protected readonly GameContext Context;
+    protected readonly GameTrackerContext Context;
 
-    protected RepositoryBase(GameContext context)
+    protected RepositoryBase(GameTrackerContext context)
     {
         Context = context;
     }

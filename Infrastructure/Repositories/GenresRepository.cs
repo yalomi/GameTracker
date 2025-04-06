@@ -1,12 +1,13 @@
 ﻿using Application.IRepositories;
 using Core.Entities;
+using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
 public class GenresRepository : RepositoryBase<Genre>, IGenreRepository
 {
-    public GenresRepository(GameContext context) : base(context)
+    public GenresRepository(GameTrackerContext context) : base(context)
     {
     }
 
@@ -14,7 +15,7 @@ public class GenresRepository : RepositoryBase<Genre>, IGenreRepository
         GetAll().OrderBy(g => g.Name).ToListAsync();
 
 
-    public Task<Genre> GetGenreById(Guid id) =>
+    public Task<Genre?> GetGenreById(Guid id) =>
         GetByCondition(g => g.Id == id, false).FirstOrDefaultAsync();
     
 
