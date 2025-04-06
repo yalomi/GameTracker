@@ -1,5 +1,4 @@
 ﻿using Core.Entities;
-using Infrastructure.Migrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

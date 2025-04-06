@@ -1,4 +1,5 @@
 ﻿using Application.Dtos;
+using Application.Dtos.PostDtos;
 using AutoMapper;
 using Core.Entities;
 
@@ -19,5 +20,15 @@ public class GamesMappingProfile : Profile
 
         CreateMap<Game, GameDto>().ForMember(dest => dest.GenresNames, opt 
             => opt.MapFrom(src => src.Genres.Select(g => g.Name)));
+        
+        CreateMap<AddGameToCollectionDto, UserGame>().ForMember(dest => dest.FinishedAt, opt 
+                => opt.MapFrom(src => src.FinishedAt)) 
+            .ForMember(dest => dest.Status, opt 
+                => opt.MapFrom(src => GameStatus.Finished))
+            .ForMember(dest => dest.AddedAt, opt 
+                => opt.MapFrom(src => DateTime.UtcNow))
+            .ForMember(dest => dest.UserId, opt
+                => opt.Ignore());
+        
     }
 }

@@ -6,6 +6,6 @@ public interface IRepositoryManager
 {
     IGenreRepository GenreRepository { get; }
     IGameRepository GameRepository { get; }
-    IUserRepository UserRepository { get; }
+    IUsersRepository UsersRepository { get; }
     Task SaveAsync();
 }

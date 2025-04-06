@@ -22,6 +22,11 @@ public class GamesRepository : RepositoryBase<Game>, IGameRepository
         return games; 
     }
 
+    public async Task<Game?> GetByIdAsync(Guid id)
+    {
+        return await GetByCondition(g => g.Id == id, false).FirstOrDefaultAsync();
+    }
+
     public async Task AddGameAsync(Game game, RawgGame rawgGame)
     {
         // var genres = Context.Genres.Where(genre =>

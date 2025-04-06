@@ -13,7 +13,7 @@ public class UserGame
     
     public string? Review { get; set; }
     public DateTime AddedAt { get; set; }
-    public DateTime FinishedAt { get; set; }
+    public DateOnly? FinishedAt { get; set; }
     
     public User User { get; set; }
     public Game Game { get; set; }

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(GameTrackerContext))]
-    [Migration("20250405185447_AddUserGames")]
-    partial class AddUserGames
+    [Migration("20250406202039_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -102,8 +102,8 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("AddedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("FinishedAt")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly?>("FinishedAt")
+                        .HasColumnType("date");
 
                     b.Property<Guid>("GameId")
                         .HasColumnType("uuid");

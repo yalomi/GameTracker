@@ -6,15 +6,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class UserRepository : RepositoryBase<User>, IUserRepository
+public class UsersRepository : RepositoryBase<User>, IUsersRepository
 {
-    public UserRepository(GameTrackerContext context) : base(context)
+    public UsersRepository(GameTrackerContext context) : base(context)
     {
     }
+    
+    public async Task<List<User>> GetAllAsync() 
+        => await GetAll().ToListAsync();
 
     public async Task<User?> GetByEmailAsync(string email) 
         => await GetByCondition(u => u.Email == email, false).SingleOrDefaultAsync();
 
     public async Task AddAsync(User user) 
         => await CreateAsync(user);
+
+    public async Task AddGameToCollection(UserGame userGame)
+    {
+        await Context.UserGames.AddAsync(userGame);
+    }
 }

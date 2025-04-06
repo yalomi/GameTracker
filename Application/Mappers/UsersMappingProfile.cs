@@ -10,5 +10,8 @@ public class UsersMappingProfile : Profile
     {
         CreateMap<UserRegisterDto, User>().ForMember(dest => dest.Id, opt 
             => opt.MapFrom(source => Guid.NewGuid()));
+        
+        CreateMap<User, UserDto>();
+        
     }
 }
