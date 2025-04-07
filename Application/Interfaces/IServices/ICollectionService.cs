@@ -5,6 +5,7 @@ namespace Application.Interfaces.IServices;
 
 public interface ICollectionService
 {
-    public Task<List<GetGameDto>> GetAll(Guid userId);
-    Task AddGameToCollection(PostGameDto gameDto, Guid userId);
+    Task<List<GetGameDto>> GetAll(Guid userId);
+    Task<GetGameDto> GetById(Guid gameId, Guid userId);
+    Task<GetGameDto> AddGameToCollection(PostGameDto gameDto, Guid userId);
 }
