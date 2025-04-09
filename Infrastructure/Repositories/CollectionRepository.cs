@@ -1,4 +1,5 @@
-﻿using Application.Interfaces.IRepositories;
+﻿using Application.Dtos.PutDtos;
+using Application.Interfaces.IRepositories;
 using Core.Entities;
 using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,15 @@ public class CollectionRepository : RepositoryBase<UserGame>, ICollectionReposit
             .ThenInclude(g => g.Genres)
             .FirstOrDefaultAsync();
     
-    public async Task AddGameToCollection(UserGame userGame)
+    public async Task AddUserGame(UserGame userGame)
         => await CreateAsync(userGame);
-    
+
+    public async Task UpdateUserGame(UserGame userGame, PutGameDto gameDto)
+        => await Context.UserGames
+            .Where(ug => ug.GameId == userGame.GameId && ug.UserId == userGame.UserId)
+            .ExecuteUpdateAsync(x
+                => x.SetProperty(ug => ug.Rating, gameDto.Rating)
+                    .SetProperty(ug => ug.Review, gameDto.Review)
+                    .SetProperty(ug => ug.FinishedAt, gameDto.FinishedAt));
+
 }

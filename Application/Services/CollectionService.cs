@@ -1,5 +1,6 @@
 ﻿using Application.Dtos.GetDtos;
 using Application.Dtos.PostDtos;
+using Application.Dtos.PutDtos;
 using Application.Interfaces.IServices;
 using Application.IRepositories;
 using AutoMapper;
@@ -38,7 +39,7 @@ public class CollectionService : ICollectionService
         return gameDto;
     }
 
-    public async Task<GetGameDto> AddGameToCollection(PostGameDto gameDto, Guid userId)
+    public async Task<GetGameDto> AddUserGame(PostGameDto gameDto, Guid userId)
     {
         var game = await _manager.GameRepository.GetByIdAsync(gameDto.GameId) 
                    ?? throw new GameNotFoundException(gameDto.GameId);
@@ -46,10 +47,19 @@ public class CollectionService : ICollectionService
         var userGame = _mapper.Map<UserGame>(gameDto);
         userGame.UserId = userId;
         
-        await _manager.CollectionRepository.AddGameToCollection(userGame);
+        await _manager.CollectionRepository.AddUserGame(userGame);
         await _manager.SaveAsync();
 
         var createdGameDto = await GetById(userGame.GameId, userGame.UserId);
         return createdGameDto;
+    }
+
+    public async Task UpdateUserGame(PutGameDto gameDto, Guid gameId, Guid userId)
+    {
+        var userGame = await _manager.CollectionRepository.GetByGameAndUserId(gameId, userId) 
+                       ?? throw new GameNotFoundException(gameId);
+
+        await _manager.CollectionRepository.UpdateUserGame(userGame, gameDto);
+        await _manager.SaveAsync();
     }
 }

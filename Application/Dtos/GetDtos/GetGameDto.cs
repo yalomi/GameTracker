@@ -12,6 +12,7 @@ public class GetGameDto
     public int? Metacritic { get; set; }
     public List<string> GenresNames { get; set; } = new List<string>();
     public GameStatus Status { get; set; }
+    public int Rating { get; set; }
     public string? Review { get; set; }
     public DateOnly? FinishedAt { get; set; }
 }

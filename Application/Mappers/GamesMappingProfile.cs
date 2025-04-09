@@ -48,6 +48,8 @@ public class GamesMappingProfile : Profile
                 => opt.MapFrom(src => src.Game.Genres.Select(g => g.Name)))
             .ForMember(dest => dest.Status, opt
                 => opt.MapFrom(src => src.Status))
+            .ForMember(dest => dest.Rating, opt
+                => opt.MapFrom(src => src.Rating))
             .ForMember(dest => dest.Review, opt
                 => opt.MapFrom(src => src.Review))
             .ForMember(dest => dest.FinishedAt, opt 
