@@ -60,6 +60,13 @@ public class CollectionService : ICollectionService
                        ?? throw new GameNotFoundException(gameId);
 
         await _manager.CollectionRepository.UpdateUserGame(userGame, gameDto);
-        await _manager.SaveAsync();
+    }
+
+    public async Task DeleteUserGame(Guid gameId, Guid userId)
+    {
+        var userGame = await _manager.CollectionRepository.GetByGameAndUserId(gameId, userId) 
+                       ?? throw new GameNotFoundException(gameId);
+        
+        await _manager.CollectionRepository.DeleteUserGame(gameId, userId);
     }
 }

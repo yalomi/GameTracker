@@ -9,4 +9,5 @@ public interface ICollectionRepository
     Task<UserGame?> GetByGameAndUserId(Guid gameId, Guid userId);
     Task AddUserGame(UserGame userGame);
     Task UpdateUserGame(UserGame userGame, PutGameDto gameDto);
+    Task DeleteUserGame(Guid gameId, Guid userId);
 }

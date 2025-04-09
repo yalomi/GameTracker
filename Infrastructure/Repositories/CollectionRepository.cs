@@ -34,5 +34,8 @@ public class CollectionRepository : RepositoryBase<UserGame>, ICollectionReposit
                 => x.SetProperty(ug => ug.Rating, gameDto.Rating)
                     .SetProperty(ug => ug.Review, gameDto.Review)
                     .SetProperty(ug => ug.FinishedAt, gameDto.FinishedAt));
-
+    
+    public async Task DeleteUserGame(Guid gameId, Guid userId) => await Context.UserGames
+        .Where(ug => ug.GameId == gameId && ug.UserId == userId)
+        .ExecuteDeleteAsync();
 }

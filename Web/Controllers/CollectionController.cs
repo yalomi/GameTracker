@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using Application.Dtos.GetDtos;
+﻿using Application.Dtos.GetDtos;
 using Application.Dtos.PostDtos;
 using Application.Dtos.PutDtos;
 using Application.Interfaces.IManagers;
@@ -57,6 +56,16 @@ public class CollectionController : ControllerBase
         var userId = User.GetUserId() ?? throw new Exception();
         
         await _manager.CollectionService.UpdateUserGame(gameDto, gameId, userId);
+        return NoContent();
+    }
+
+    [Authorize]
+    [HttpDelete("{gameId}")]
+    public async Task<ActionResult> DeleteUserGame([FromRoute] Guid gameId)
+    {
+        var userId = User.GetUserId() ?? throw new Exception();
+        
+        await _manager.CollectionService.DeleteUserGame(gameId, userId);
         return NoContent();
     }
     

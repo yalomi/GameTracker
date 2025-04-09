@@ -10,4 +10,5 @@ public interface ICollectionService
     Task<GetGameDto> GetById(Guid gameId, Guid userId);
     Task<GetGameDto> AddUserGame(PostGameDto gameDto, Guid userId);
     Task UpdateUserGame(PutGameDto gameDto, Guid gameId, Guid userId);
+    Task DeleteUserGame(Guid gameId, Guid userId);
 }
