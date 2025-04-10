@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using Application.Interfaces;
 using Core.Entities;
@@ -12,7 +13,7 @@ public class JwtProvider(IOptions<JwtOptions> options) : IJwtProvider
 {
     private readonly JwtOptions _options = options.Value;
 
-    public string GenerateToken(User user)
+    public string GenerateAccessToken(User user)
     {
         Claim[] claims = [new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())];
         var signingCredentials = new SigningCredentials(
@@ -26,6 +27,14 @@ public class JwtProvider(IOptions<JwtOptions> options) : IJwtProvider
         
         var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
         return tokenString;
+    }
+
+    public string GenerateRefreshToken()
+    {
+        var randomNumber = new byte[32];
+        using var rng = RandomNumberGenerator.Create();
+        rng.GetBytes(randomNumber);
+        return Convert.ToBase64String(randomNumber);
     }
 }
 
