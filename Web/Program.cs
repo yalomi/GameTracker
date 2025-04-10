@@ -36,7 +36,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddDbContext<GameTrackerContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddSingleton<IJwtProvider, JwtProvider>(); //Singleton or Scoped
+builder.Services.AddSingleton<IJwtProvider, JwtProvider>(); //Singleton or Scoped?
 
 var app = builder.Build();
 

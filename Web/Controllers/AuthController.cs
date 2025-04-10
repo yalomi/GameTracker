@@ -24,10 +24,18 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<string>> Login([FromBody] UserLoginDto request)
+    public async Task<ActionResult<TokenResponseDto>> Login([FromBody] UserLoginDto request)
     {
-        var token = await _manager.UserService.Login(request);
+        var response = await _manager.UserService.Login(request);
 
-        return Ok(token);
+        return Ok(response);
     }
+
+    [HttpPost("refresh-token")]
+    public async Task<ActionResult<TokenResponseDto>> RefreshToken(RefreshTokenRequestDto request)
+    {
+        var result = await _manager.UserService.RefreshTokensAsync(request);
+        return Ok(result);
+    }
+    
 }

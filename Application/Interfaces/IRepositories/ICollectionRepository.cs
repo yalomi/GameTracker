@@ -1,9 +1,13 @@
-﻿using Core.Entities;
+﻿using Application.Dtos.PutDtos;
+using Core.Entities;
 
 namespace Application.Interfaces.IRepositories;
 
 public interface ICollectionRepository
 {
     Task<List<UserGame>> GetAll(Guid userId);
-    Task AddGameToCollection(UserGame userGame);
+    Task<UserGame?> GetByGameAndUserId(Guid gameId, Guid userId);
+    Task AddUserGame(UserGame userGame);
+    Task UpdateUserGame(UserGame userGame, PutGameDto gameDto);
+    Task DeleteUserGame(Guid gameId, Guid userId);
 }

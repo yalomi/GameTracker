@@ -41,20 +41,47 @@ public class UserService : IUserService
         await _manager.SaveAsync();
     }
 
-    public async Task<string> Login(UserLoginDto userDto)
+    public async Task<TokenResponseDto?> Login(UserLoginDto userDto)
     {
         var user = await _manager.UsersRepository.GetByEmailAsync(userDto.Email);
-        
         if (user == null || _passwordHasher.Verify(userDto.Password, user.PasswordHash) == false)
         {
             throw new InvalidCredentialException();
         }
-        
-        var token = _jwtProvider.GenerateToken(user);
 
-        return token;
+        return await GenerateTokenResponseAsync(user);
     }
 
+    public async Task<TokenResponseDto> RefreshTokensAsync(RefreshTokenRequestDto request)
+    {
+        var user = await _manager.UsersRepository.GetByIdAsync(request.UserId);
+        if (user is null || user.RefreshToken != request.RefreshToken || user.RefreshTokenExpiry <= DateTime.UtcNow)
+        {
+            throw new Exception("User does not exist or refresh token is invalid.");
+        }
+        
+        return await GenerateTokenResponseAsync(user);
+    }
+
+    private async Task<TokenResponseDto> GenerateTokenResponseAsync(User user)
+    {
+        _manager.UsersRepository.Attach(user);
+        
+        var accessToken = _jwtProvider.GenerateAccessToken(user);
+        var refreshToken = _jwtProvider.GenerateRefreshToken();
+        
+        user.RefreshToken = refreshToken;
+        user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(7);
+        await _manager.SaveAsync();
+
+        var response = new TokenResponseDto
+        {
+            AccessToken = accessToken,
+            RefreshToken = refreshToken
+        };
+
+        return response;
+    }
     public async Task<List<UserDto>> GetAll()
     {
         var users = await _manager.UsersRepository.GetAllAsync();

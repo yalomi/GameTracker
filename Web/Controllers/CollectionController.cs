@@ -1,8 +1,10 @@
-﻿using System.Security.Claims;
+﻿using Application.Dtos.GetDtos;
 using Application.Dtos.PostDtos;
+using Application.Dtos.PutDtos;
 using Application.Interfaces.IManagers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Web.Extensions;
 
 namespace Web.Controllers;
 
@@ -20,27 +22,51 @@ public class CollectionController : ControllerBase
     [HttpGet]
     public async Task<ActionResult> GetCollection()
     {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (userId == null)
-        {
-            return Unauthorized();
-        }
+        var userId = User.GetUserId() ?? throw new Exception();
         
-        var userDtos = await _manager.CollectionService.GetAll(Guid.Parse(userId));
+        var userDtos = await _manager.CollectionService.GetAll(userId);
         return Ok(userDtos);
     }
 
     [Authorize]
-    [HttpPost]
-    public async Task<ActionResult> AddGame([FromBody] PostGameDto gameDto)
+    [HttpGet]
+    [Route("{gameId}")]
+    public async Task<ActionResult<GetGameDto>> GetUserGame(Guid gameId)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        if (userId == null)
-        {
-            return Unauthorized();
-        }
-
-        await _manager.CollectionService.AddGameToCollection(gameDto, Guid.Parse(userId));
-        return Created();
+        var userId = User.GetUserId() ?? throw new Exception();
+        
+        var game = await _manager.CollectionService.GetById(gameId, userId);
+        return Ok(game);
     }
+
+    [Authorize]
+    [HttpPost]
+    public async Task<ActionResult<GetGameDto>> AddGame([FromBody] PostGameDto gameDto)
+    {
+        var userId = User.GetUserId() ?? throw new Exception();
+
+        var createdGame = await _manager.CollectionService.AddUserGame(gameDto, userId);
+        return CreatedAtAction(nameof(GetUserGame), new { gameId = createdGame.Id }, createdGame);
+    }
+
+    [Authorize]
+    [HttpPut("{gameId}")]
+    public async Task<ActionResult<GetGameDto>> UpdateGame([FromBody] PutGameDto gameDto, [FromRoute] Guid gameId)
+    {
+        var userId = User.GetUserId() ?? throw new Exception();
+        
+        await _manager.CollectionService.UpdateUserGame(gameDto, gameId, userId);
+        return NoContent();
+    }
+
+    [Authorize]
+    [HttpDelete("{gameId}")]
+    public async Task<ActionResult> DeleteUserGame([FromRoute] Guid gameId)
+    {
+        var userId = User.GetUserId() ?? throw new Exception();
+        
+        await _manager.CollectionService.DeleteUserGame(gameId, userId);
+        return NoContent();
+    }
+    
 }

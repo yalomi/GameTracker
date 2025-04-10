@@ -8,7 +8,6 @@ public class UserGame
     
     public int Rating { get; set; }
     public GameStatus Status { get; set; }
-    
     public string? Review { get; set; }
     public DateTime AddedAt { get; set; }
     public DateOnly? FinishedAt { get; set; }
